@@ -5,15 +5,12 @@ const initialState = {
   ],
 };
 
-export const getBooks = createAsyncThunk('books/replaceTodos', async () => {
-  const result = await fetch('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/fHatQnkfg2s6EXqIovaY/books', {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-  }).then((response) => response.text());
-  return result;
-});
+export const getBooks = createAsyncThunk('books/getBooks', async () => fetch('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/fHatQnkfg2s6EXqIovaY/books', {
+  method: 'GET',
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+}).then((response) => response.text()));
 
 const postBook = createAsyncThunk('books/addBooks', async (book) => {
   const response = await fetch('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/fHatQnkfg2s6EXqIovaY/books', {
@@ -56,15 +53,24 @@ const booksSlice = createSlice({
         state.books = action.payload;
       }
     },
-    extraReducers: {
-      [getBooks.fulfilled]: (state, action) => {
-        console.log('asd');
-        return action.payload;
-      },
-      [getBooks.pending]: () => {
-        console.log('asd');
-        // return action.payload;
-      },
+  },
+  extraReducers: {
+    [getBooks.fulfilled]: (state, action) => {
+      console.log('fulfilled');
+      let temp = action.payload;
+      const arr = [];
+      temp = JSON.parse(temp);
+      Object.keys(temp).forEach((key) => {
+        temp[key][0].item_id = key;
+        arr.push(temp[key][0]);
+      });
+      state.books = arr;
+    },
+    [getBooks.pending]: () => {
+      console.log('pending');
+    },
+    [getBooks.rejected]: () => {
+      console.log('rejected');
     },
   },
 });
