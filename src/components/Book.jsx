@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { deleteBooks } from '../Redux/Books/Books';
 
 function Book({ title, author, id }) {
+  console.log(id);
   const dispatch = useDispatch();
 
   const handleRemoveBook = () => {
@@ -28,5 +29,5 @@ export default Book;
 Book.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
