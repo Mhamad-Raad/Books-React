@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addBooks } from '../Redux/Books/Books';
 
 function AddBookForm() {
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+
   const dispatch = useDispatch();
   const submitHandler = (event) => {
     event.preventDefault();
-    const title = event.target.title.value;
-    const author = event.target.author.value;
     const id = Math.floor(Math.random() * 1000);
     const book = {
       id,
@@ -15,20 +16,28 @@ function AddBookForm() {
       author,
     };
     dispatch(addBooks(book));
-    event.target.title.value = '';
-    event.target.author.value = '';
+    setTitle('');
+    setAuthor('');
+  };
+
+  const authorStateHandler = (event) => {
+    setAuthor(event.target.value);
+  };
+
+  const titleStateHandler = (event) => {
+    setTitle(event.target.value);
   };
 
   return (
     <form onSubmit={submitHandler}>
       <label htmlFor="title">
         Title
-        <input type="text" name="title" id="title" required />
+        <input type="text" name="title" id="title" value={title} onChange={titleStateHandler} required />
       </label>
 
       <label htmlFor="author">
         Author
-        <input type="text" name="author" id="author" required />
+        <input type="text" name="author" id="author" value={author} onChange={authorStateHandler} required />
       </label>
 
       <button type="submit">Add Book</button>
