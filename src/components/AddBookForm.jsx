@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addBooks } from '../Redux/Books/Books';
+import { postBook, addBooks } from '../Redux/Books/Books';
 // import { postBook } from '../Redux/Books/Books';
 function AddBookForm() {
   const [title, setTitle] = useState('');
@@ -9,13 +9,16 @@ function AddBookForm() {
   const dispatch = useDispatch();
   const submitHandler = (event) => {
     event.preventDefault();
-    const item_id = Math.floor(Math.random() * 1000);
+    const item_id = Math.floor(Math.random() * 1000).toString();
     const book = {
       item_id,
       title,
       author,
+      category: 'Action',
     };
-    dispatch(addBooks(book));
+    dispatch(postBook(book)).then(
+      () => dispatch(addBooks(book)),
+    );
     setTitle('');
     setAuthor('');
   };

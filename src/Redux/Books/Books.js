@@ -12,35 +12,25 @@ export const getBooks = createAsyncThunk('books/getBooks', async () => fetch('ht
   },
 }).then((response) => response.text()));
 
-const postBook = createAsyncThunk('books/addBooks', async (book) => {
-  const response = await fetch('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/fHatQnkfg2s6EXqIovaY/books', {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-    body: JSON.stringify({
-      item_id: book.item_id,
-      title: 'The Hunger Games',
-      author: book.author,
-      category: 'Action',
-    }),
-  }).then((response) => response)
-    .then((result) => result.text());
-  return response;
-});
+export const postBook = createAsyncThunk('books/addBooks', async (book) => fetch('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/fHatQnkfg2s6EXqIovaY/books', {
+  method: 'POST',
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+  body: JSON.stringify({
+    item_id: book.item_id,
+    title: book.title,
+    author: book.author,
+    category: 'Action',
+  }),
+}));
 
 const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
     addBooks(state, action) {
-      if (action.payload) {
-        try {
-          postBook(action.payload);
-        } catch (err) {
-          console.log(err);
-        }
-      }
+      state.books.unshift(action.payload);
     },
     deleteBooks(state, action) {
       if (action.payload) {
@@ -56,7 +46,7 @@ const booksSlice = createSlice({
   },
   extraReducers: {
     [getBooks.fulfilled]: (state, action) => {
-      console.log('fulfilled');
+      // console.log('fulfilled');
       let temp = action.payload;
       const arr = [];
       temp = JSON.parse(temp);
@@ -67,10 +57,19 @@ const booksSlice = createSlice({
       state.books = arr;
     },
     [getBooks.pending]: () => {
-      console.log('pending');
+      // console.log('Bet Books pending');
     },
     [getBooks.rejected]: () => {
-      console.log('rejected');
+      // console.log('Get Books rejected');
+    },
+    [postBook.fulfilled]: () => {
+      // state.books.push(action.payload);
+    },
+    [postBook.pending]: () => {
+      // console.log('pending');
+    },
+    [postBook.rejected]: () => {
+      // console.log('rejected');
     },
   },
 });
