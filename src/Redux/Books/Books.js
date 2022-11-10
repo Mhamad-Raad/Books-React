@@ -25,6 +25,16 @@ export const postBook = createAsyncThunk('books/addBooks', async (book) => fetch
   }),
 }));
 
+export const deleteBookAPI = createAsyncThunk('books/deleteBooks', async (id) => fetch(`https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/fHatQnkfg2s6EXqIovaY/books/${id}`, {
+  method: 'DELETE',
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+  body: JSON.stringify({
+    key: id,
+  }),
+}));
+
 const booksSlice = createSlice({
   name: 'books',
   initialState,
@@ -44,8 +54,8 @@ const booksSlice = createSlice({
       }
     },
   },
-  extraReducers: {
-    [getBooks.fulfilled]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(getBooks.fulfilled, (state, action) => {
       // console.log('fulfilled');
       let temp = action.payload;
       const arr = [];
@@ -55,25 +65,33 @@ const booksSlice = createSlice({
         arr.push(temp[key][0]);
       });
       state.books = arr;
-    },
-    [getBooks.pending]: () => {
+    });
+    builder.addCase(getBooks.pending, () => {
       // console.log('Bet Books pending');
-    },
-    [getBooks.rejected]: () => {
+    });
+    builder.addCase(getBooks.rejected, () => {
       // console.log('Get Books rejected');
-    },
-    [postBook.fulfilled]: () => {
+    });
+    builder.addCase(postBook.fulfilled, () => {
       // state.books.push(action.payload);
-    },
-    [postBook.pending]: () => {
-      // console.log('pending');
-    },
-    [postBook.rejected]: () => {
+    });
+    builder.addCase(postBook.pending, () => {
+    // console.log('pending');
+    });
+    builder.addCase(postBook.rejected, () => {
       // console.log('rejected');
-    },
+    });
+    builder.addCase(deleteBookAPI.fulfilled, () => {
+      // console.log('fulfilled');
+    });
+    builder.addCase(deleteBookAPI.pending, () => {
+      // console.log('pending');
+    });
+    builder.addCase(deleteBookAPI.rejected, () => {
+      // console.log('rejected');
+    });
   },
 });
 
-// export const postbook = postBook;
 export const { addBooks, deleteBooks, replaceTodos } = booksSlice.actions;
 export default booksSlice.reducer;
