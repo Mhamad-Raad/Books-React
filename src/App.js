@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getBooks());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">
