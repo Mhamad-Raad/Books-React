@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postBook, addBooks } from '../Redux/Books/Books';
-// import { postBook } from '../Redux/Books/Books';
+import css from './AddBookForm.module.css';
+
 function AddBookForm() {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -26,25 +27,40 @@ function AddBookForm() {
   const authorStateHandler = (event) => {
     setAuthor(event.target.value);
   };
-
   const titleStateHandler = (event) => {
     setTitle(event.target.value);
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <label htmlFor="title">
-        Title
-        <input type="text" name="title" id="title" value={title} onChange={titleStateHandler} required />
-      </label>
-
-      <label htmlFor="author">
-        Author
-        <input type="text" name="author" id="author" value={author} onChange={authorStateHandler} required />
-      </label>
-
-      <button type="submit">Add Book</button>
-    </form>
+    <>
+      <div className={css.Line} />
+      <h2 className={css.form_header}>ADD NEW BOOK</h2>
+      <form onSubmit={submitHandler}>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value={title}
+          className={css.title_input}
+          onChange={titleStateHandler}
+          required
+        />
+        <select
+          type="text"
+          name="author"
+          id="author"
+          value={author}
+          onChange={authorStateHandler}
+          className={css.category_input}
+          required
+        >
+          <option value="actual value 1">Display Text 1</option>
+          <option value="actual value 2">Display Text 2</option>
+          <option value="actual value 3">Display Text 3</option>
+        </select>
+        <button type="submit" className={css.formBTN}>Add Book</button>
+      </form>
+    </>
   );
 }
 
