@@ -12,7 +12,7 @@
 .header_left_nav {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -25,7 +25,7 @@
   color: #0290ff;
   margin-right: 20px;
   float: left;
-  margin-left: 2rem;
+  margin-left: 6.25rem;
 }
 
 a {
@@ -61,7 +61,7 @@ ul {
   border-radius: 50%;
   border: solid 1px #e8e8e8;
   float: right;
-  margin-right: 2rem;
+  margin-right: 6.25rem;
 }
 
 .pica {
