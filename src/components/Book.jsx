@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { CircularProgressbar } from 'react-circular-progressbar';
@@ -15,12 +15,18 @@ function Book(
   },
 ) {
   const dispatch = useDispatch();
+  const [progress, setProgress] = useState(0);
 
   const handleRemoveBook = () => {
     dispatch(deleteBookAPI(id)).then(
       dispatch(deleteBooks(id)),
     );
   };
+
+  const handleProgress = () => {
+    setProgress((prevS) => prevS + 1);
+  };
+
   return (
     <div className={css.card}>
       <span>
@@ -39,17 +45,26 @@ function Book(
         <span className={css.progressSection}>
           <CircularProgressbar
             className={css.progressBar}
-            value={40}
+            value={progress}
           />
           <div className={css.percentage}>
-            <p className={css.percentageNumber}>40%</p>
+            <p className={css.percentageNumber}>
+              {progress}
+              %
+            </p>
             <p>Completed</p>
           </div>
           <div className={css.VlingeR} />
           <div className={css.updateProgress}>
             <h3>Current Chapter</h3>
             <p>Chapter 17</p>
-            <button type="button" className={css.updateProgressBTN}>Update Progress</button>
+            <button
+              type="button"
+              className={css.updateProgressBTN}
+              onClick={handleProgress}
+            >
+              Update Progress
+            </button>
           </div>
         </span>
       </div>
