@@ -1,0 +1,123 @@
+.card {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin-bottom: 1rem;
+  padding: 1.5rem 1rem;
+  margin-left: 6.25rem;
+  margin-right: 6.25rem;
+  width: 100%;
+  min-width: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.category {
+  color: #606060;
+  font-weight: bolder;
+  font-size: 14px;
+  margin: 0;
+  font-family: Montserrat, sans-serif;
+}
+
+.title {
+  color: #000;
+  font-size: 18px;
+  font-weight: bolder;
+  margin-bottom: 0;
+  margin-top: 5px;
+  font-family: RobotoSlab, sans-serif;
+}
+
+.author {
+  margin-top: 0;
+  color: #4386bf;
+  font-weight: 300;
+  font-size: 14px;
+  font-family: Montserrat, sans-serif;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+}
+
+.edits {
+  color: #4386bf;
+  font-weight: 300;
+  font-family: RobotoSlab, sans-serif;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.vLine {
+  width: 1px !important;
+  height: 10px;
+  background-color: #303030;
+  margin: 0 10px;
+}
+
+.progressBar {
+  width: 60px !important;
+}
+
+.percentage {
+  font-size: 16px;
+  font-weight: lighter;
+  font-family: RobotoSlab, sans-serif;
+  margin-left: 10px;
+}
+
+.progressSection {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.percentageNumber {
+  font-size: 24px;
+}
+
+.progressSection p {
+  margin: 0;
+}
+
+.VlingeR {
+  width: 1px !important;
+  height: 60px;
+  background-color: #303030;
+  margin: 0 40px;
+}
+
+.updateProgress {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-right: 20px;
+}
+
+.updateProgress h3 {
+  margin: 0;
+}
+
+.updateProgress p {
+  margin-bottom: 20px;
+}
+
+.updateProgressBTN {
+  background-color: #4386bf;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bolder;
+  font-family: RobotoSlab, sans-serif;
+  cursor: pointer;
+}

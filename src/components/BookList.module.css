@@ -1,0 +1,14 @@
+.booksList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

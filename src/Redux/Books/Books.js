@@ -21,7 +21,7 @@ export const postBook = createAsyncThunk('books/addBooks', async (book) => fetch
     item_id: book.item_id,
     title: book.title,
     author: book.author,
-    category: 'Action',
+    category: book.category,
   }),
 }));
 
