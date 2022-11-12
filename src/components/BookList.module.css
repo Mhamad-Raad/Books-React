@@ -6,3 +6,9 @@
   width: 100%;
   position: relative;
 }
+
+li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
